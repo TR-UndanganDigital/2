@@ -841,15 +841,17 @@
     .reveal-tilt-up { transform: translate3d(0, 24px, 0); }
 
     /* ==========================================================================
-       ANIMASI ZOOM & BLUR HALUS DARI TENGAH (REVEAL-ZOOM-CENTER - SMOOTH & RELAXED)
+       ANIMASI ZOOM DARI KECIL DI BAGIAN TENGAH (REVEAL-ZOOM-CENTER)
+       DURASI HALUS 3 DETIK (LUXURY CINEMATIC IN-ANIMATION)
        ========================================================================== */
     .reveal-zoom-center {
-      transform: scale(0.65) translate3d(0, 12px, 0);
-      filter: blur(6px);
+      opacity: 0;
+      transform: scale(0.18) translate3d(0, 16px, 0);
       transform-origin: center center;
-      transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                  transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                  filter 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 3.0s cubic-bezier(0.16, 1, 0.3, 1), transform 3.0s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
     .reveal-on-scroll.is-revealed,
@@ -861,7 +863,6 @@
     .reveal-zoom-center.is-revealed {
       opacity: 1 !important;
       transform: translate3d(0, 0, 0) scale(1) !important;
-      filter: blur(0) !important;
     }
 
     .delay-75  { transition-delay: 0.08s !important; }
@@ -1273,13 +1274,19 @@
       border: 1.5px solid var(--gold-accent);
       box-shadow: 0 4px 14px rgba(197, 168, 128, 0.22), var(--shadow-sm);
       transform-origin: center center;
-      transition: transform 0.45s var(--ease-luxury), box-shadow 0.45s var(--ease-luxury), border-color 0.35s ease;
+      /* Transisi reveal 3 detik agar gerakan zoom-in lembut dari tengah */
+      transition: opacity 3.0s cubic-bezier(0.16, 1, 0.3, 1), transform 3.0s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s var(--ease-luxury), border-color 0.35s ease;
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
-    .gallery-item:hover, .gallery-item:active {
-      transform: translateY(-3px) scale(1.02);
+    /* Interaksi hover responsif setelah foto berhasil direveal */
+    .gallery-item.is-revealed:hover, .gallery-item.is-revealed:active {
+      transform: translateY(-3px) scale(1.02) !important;
       box-shadow: 0 8px 24px rgba(197, 168, 128, 0.42), 0 0 16px rgba(223, 202, 167, 0.35);
       border-color: var(--gold-light);
+      transition: transform 0.45s var(--ease-luxury), box-shadow 0.45s var(--ease-luxury), border-color 0.35s ease;
     }
 
     /* Foto ke-1 dan ke-8 (Highlight Landscape) */
