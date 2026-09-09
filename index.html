@@ -16,7 +16,7 @@
     /**
      * 2. Direct URL Foto Cover untuk Thumbnail WhatsApp di GitHub Pages
      */
-    var DEFAULT_OG_IMAGE_URL = "https://drive.google.com/file/d/1ZuSXk9q3Ieei94JHcjlNIE2SY7WZBzQV/view?usp=drive_link";
+    var DEFAULT_OG_IMAGE_URL = "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80";
   </script>
 
   <title id="metaTitle">The Wedding of Tono & Tini</title>
@@ -25,7 +25,7 @@
   
   <meta itemprop="name" content="The Wedding of Tono & Tini">
   <meta itemprop="description" content="Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.">
-  <meta itemprop="image" id="dynItempropImage" content="https://drive.google.com/file/d/1ZuSXk9q3Ieei94JHcjlNIE2SY7WZBzQV/view?usp=drive_link">
+  <meta itemprop="image" id="dynItempropImage" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="id_ID">
@@ -33,19 +33,19 @@
   <meta property="og:title" id="dynOgTitle" content="The Wedding of Tono & Tini">
   <meta property="og:description" id="dynOgDesc" content="Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.">
   
-  <meta property="og:image" id="dynOgImage" content="https://drive.google.com/file/d/1ZuSXk9q3Ieei94JHcjlNIE2SY7WZBzQV/view?usp=drive_link">
-  <meta property="og:image:secure_url" id="dynOgImageSecure" content="https://drive.google.com/file/d/1ZuSXk9q3Ieei94JHcjlNIE2SY7WZBzQV/view?usp=drive_link">
+  <meta property="og:image" id="dynOgImage" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:image:secure_url" id="dynOgImageSecure" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Wedding Invitation Cover Photo">
 
-  <link rel="image_src" id="dynLinkImageSrc" href="https://drive.google.com/file/d/1ZuSXk9q3Ieei94JHcjlNIE2SY7WZBzQV/view?usp=drive_link">
+  <link rel="image_src" id="dynLinkImageSrc" href="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" id="dynTwTitle" content="The Wedding of Tono & Tini">
   <meta name="twitter:description" id="dynTwDesc" content="Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.">
-  <meta name="twitter:image" id="dynTwImage" content="https://drive.google.com/file/d/1ZuSXk9q3Ieei94JHcjlNIE2SY7WZBzQV/view?usp=drive_link">
+  <meta name="twitter:image" id="dynTwImage" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -823,7 +823,8 @@
     .reveal-slide-right,
     .reveal-pop-shimmer,
     .reveal-scale,
-    .reveal-tilt-up {
+    .reveal-tilt-up,
+    .reveal-zoom-center {
       opacity: 0;
       transition: opacity 1.5s var(--ease-luxury), transform 1.5s var(--ease-luxury);
       will-change: opacity, transform;
@@ -839,12 +840,22 @@
     .reveal-scale { transform: scale(0.94) translate3d(0, 16px, 0); }
     .reveal-tilt-up { transform: translate3d(0, 24px, 0); }
 
+    /* ==========================================================================
+       ANIMASI ZOOM DARI KECIL DI BAGIAN TENGAH (REVEAL-ZOOM-CENTER)
+       ========================================================================== */
+    .reveal-zoom-center {
+      transform: scale(0.08);
+      transform-origin: center center;
+      transition: opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1), transform 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
     .reveal-on-scroll.is-revealed,
     .reveal-slide-left.is-revealed,
     .reveal-slide-right.is-revealed,
     .reveal-pop-shimmer.is-revealed,
     .reveal-scale.is-revealed,
-    .reveal-tilt-up.is-revealed {
+    .reveal-tilt-up.is-revealed,
+    .reveal-zoom-center.is-revealed {
       opacity: 1 !important;
       transform: translate3d(0, 0, 0) scale(1) !important;
     }
@@ -856,6 +867,7 @@
     .delay-200 { transition-delay: 0.22s !important; }
     .delay-250 { transition-delay: 0.28s !important; }
     .delay-300 { transition-delay: 0.35s !important; }
+    .delay-350 { transition-delay: 0.42s !important; }
 
     .rsvp-box,
     .footer-quote,
@@ -1235,6 +1247,9 @@
       margin: 0;
     }
 
+    /* ==========================================================================
+       BINGKAI GALERI EMAS SELARAS & MEWAH (SEMUA 8 FOTO SERAGAM)
+       ========================================================================== */
     .gallery-grid-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1247,26 +1262,29 @@
       position: relative;
       border-radius: var(--radius-md);
       overflow: hidden;
-      background-color: var(--navy-deep);
-      box-shadow: var(--shadow-sm);
-      border: 1px solid rgba(197, 168, 128, 0.35);
+      background-color: var(--bg-card);
       cursor: pointer;
       aspect-ratio: 1 / 1;
-      transform: translate3d(0, 0, 0);
-      transition: transform 0.4s var(--ease-luxury), box-shadow 0.4s var(--ease-luxury), border-color 0.3s ease;
+      /* Border emas selaras dan elegan di semua foto */
+      border: 1.5px solid var(--gold-accent);
+      box-shadow: 0 4px 14px rgba(197, 168, 128, 0.22), var(--shadow-sm);
+      transform-origin: center center;
+      transition: transform 0.45s var(--ease-luxury), box-shadow 0.45s var(--ease-luxury), border-color 0.35s ease;
     }
 
     .gallery-item:hover, .gallery-item:active {
-      transform: translateY(-3px) scale(1.018);
-      box-shadow: var(--shadow-md), 0 0 16px rgba(197, 168, 128, 0.4);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(197, 168, 128, 0.42), 0 0 16px rgba(223, 202, 167, 0.35);
       border-color: var(--gold-light);
     }
 
+    /* Foto ke-1 dan ke-8 (Highlight Landscape) */
     .gallery-item.featured-wide {
       grid-column: 1 / -1;
       aspect-ratio: 16 / 10;
       border-radius: var(--radius-lg);
-      border: 1.5px solid var(--gold-accent);
+      border: 2px solid var(--gold-accent);
+      box-shadow: 0 6px 20px rgba(197, 168, 128, 0.28), var(--shadow-md);
     }
 
     .gallery-item-img {
@@ -1285,7 +1303,7 @@
     .gallery-item-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(16, 29, 48, 0.0) 50%, rgba(16, 29, 48, 0.35) 100%);
+      background: linear-gradient(180deg, rgba(16, 29, 48, 0.0) 45%, rgba(16, 29, 48, 0.32) 100%);
       opacity: 0;
       transition: opacity 0.35s ease;
       pointer-events: none;
@@ -1380,8 +1398,8 @@
       justify-content: center;
       border-radius: var(--radius-md);
       overflow: hidden;
-      border: 1px solid rgba(197, 168, 128, 0.4);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      border: 1.5px solid var(--gold-accent);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(197, 168, 128, 0.3);
     }
 
     .lightbox-main-img {
@@ -2965,7 +2983,7 @@
     }
 
     /* ==========================================================================
-       MODULE 5: GALLERY & LIGHTBOX ENGINE (8 FOTO AUTO-SYNC)
+       MODULE 5: GALLERY & LIGHTBOX ENGINE (8 FOTO AUTO-SYNC DENGAN BINGKAI EMAS)
        ========================================================================== */
     function renderGalleryGrid(photos) {
       var container = document.getElementById('galleryGridContainer');
@@ -2990,7 +3008,8 @@
         var fallbackThumb = p.fallbackThumb || p.fallbackUrl || '';
         
         var isFeatured = (i === 0 || i === 7);
-        var cardClass = isFeatured ? 'gallery-item featured-wide reveal-scale' : 'gallery-item reveal-on-scroll';
+        // Terapkan animasi 'reveal-zoom-center' ke seluruh 8 foto agar membesar anggun dari tengah
+        var cardClass = isFeatured ? 'gallery-item featured-wide reveal-zoom-center' : 'gallery-item reveal-zoom-center';
         var delayClass = 'delay-' + ((i % 4) * 75 + 75);
 
         html += '<div class="' + cardClass + ' ' + delayClass + '" onclick="openGalleryLightbox(' + i + ')" title="Ketuk untuk melihat foto fullscreen">' +
@@ -4126,7 +4145,7 @@
         return '⛪ *UNDANGAN SAKRAMEN PERNIKAHAN* ⛪\n\n' +
           '_Salam Sejahtera dalam Kasih Kristus / Berkah Dalem_\n\n' +
           'Kepada Yth. Bapak/Ibu/Saudara/i:\n' +
-          '✨ *' + namaVal + '* ✨\n\n' +
+          '✨ *' + namaTamu + '* ✨\n\n' +
           'Dengan penuh rasa syukur atas berkat dan penyertaan Allah Bapa, perkenankan kami mengundang Anda untuk hadir dan menjadi saksi ikrar suci pernikahan kami:\n\n' +
           '💍 *' + coupleText + '* 💍\n\n' +
           'Untuk informasi lengkap mengenai waktu pelaksanaan, denah lokasi, dan konfirmasi kehadiran, silakan buka tautan undangan resmi kami berikut:\n\n' +
@@ -4424,14 +4443,14 @@
        ========================================================================== */
     var scrollObserver = null;
     function initLuxuryScrollObserver() {
-      var animElements = document.querySelectorAll('.reveal-on-scroll, .reveal-slide-left, .reveal-slide-right, .reveal-pop-shimmer, .reveal-scale, .reveal-tilt-up');
+      var animElements = document.querySelectorAll('.reveal-on-scroll, .reveal-slide-left, .reveal-slide-right, .reveal-pop-shimmer, .reveal-scale, .reveal-tilt-up, .reveal-zoom-center');
 
       if ('IntersectionObserver' in window) {
         if (scrollObserver) scrollObserver.disconnect();
 
         var observerOptions = {
           root: null,
-          rootMargin: '0px 0px -25% 0px',
+          rootMargin: '0px 0px -15% 0px',
           threshold: 0.05
         };
 
