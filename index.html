@@ -1297,18 +1297,15 @@
       background-color: var(--bg-card);
       cursor: pointer;
       aspect-ratio: 1 / 1;
-      /* Border emas selaras dan elegan di semua foto */
       border: 1.5px solid var(--gold-accent);
       box-shadow: 0 4px 14px rgba(197, 168, 128, 0.22), var(--shadow-sm);
       transform-origin: center center;
-      /* Transisi reveal 3 detik agar gerakan zoom-in lembut dari tengah */
       transition: opacity 3.0s cubic-bezier(0.16, 1, 0.3, 1), transform 3.0s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s var(--ease-luxury), border-color 0.35s ease;
       will-change: opacity, transform;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
 
-    /* Interaksi hover responsif setelah foto berhasil direveal */
     .gallery-item.is-revealed:hover, .gallery-item.is-revealed:active {
       transform: translateY(-3px) scale(1.02) !important;
       box-shadow: 0 8px 24px rgba(197, 168, 128, 0.42), 0 0 16px rgba(223, 202, 167, 0.35);
@@ -1316,7 +1313,6 @@
       transition: transform 0.45s var(--ease-luxury), box-shadow 0.45s var(--ease-luxury), border-color 0.35s ease;
     }
 
-    /* Foto ke-1 dan ke-8 (Highlight Landscape) */
     .gallery-item.featured-wide {
       grid-column: 1 / -1;
       aspect-ratio: 16 / 10;
@@ -1680,14 +1676,232 @@
 
     .toast-popup.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
+    /* ==========================================================================
+       LUXURY ANIMATED FOOTER & DECORATION ENGINE (NO PHOTO CLOSING)
+       ========================================================================== */
     .footer-quote {
       text-align: center;
-      padding: 36px 20px max(50px, env(safe-area-inset-bottom, 30px));
-      background: var(--navy-primary);
+      padding: 50px 20px max(56px, env(safe-area-inset-bottom, 34px));
+      background: radial-gradient(circle at 50% 25%, #192e4c 0%, #101d30 75%, #0b1422 100%);
       color: var(--gold-champagne);
-      border-radius: 30px 30px 0 0;
+      border-radius: 34px 34px 0 0;
       border-top: 2px solid var(--gold-accent);
       position: relative;
+      overflow: hidden;
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.45);
+    }
+
+    .footer-watermark-pattern {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image: radial-gradient(circle at 50% 50%, var(--gold-light) 1px, transparent 1px);
+      background-size: 24px 24px;
+      z-index: 1;
+    }
+
+    .footer-botanical-bg {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      pointer-events: none;
+      opacity: 0.16;
+      color: var(--gold-light);
+      z-index: 1;
+    }
+    .footer-bg-left { top: -20px; left: -50px; transform: rotate(-15deg); }
+    .footer-bg-right { bottom: 20px; right: -50px; transform: scaleX(-1) rotate(-15deg); }
+
+    .footer-ambient-sparkles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .ambient-sparkle {
+      position: absolute;
+      bottom: -15px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 10%, var(--gold-light) 60%, transparent 100%);
+      box-shadow: 0 0 10px rgba(223, 202, 167, 0.8), 0 0 16px rgba(197, 168, 128, 0.6);
+      animation: floatSparkleUp 7s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    .sparkle-1 { left: 12%; animation-duration: 6.5s; animation-delay: 0.5s; width: 5px; height: 5px; }
+    .sparkle-2 { left: 28%; animation-duration: 8.2s; animation-delay: 2.2s; width: 3px; height: 3px; }
+    .sparkle-3 { left: 50%; animation-duration: 7.0s; animation-delay: 1.2s; width: 6px; height: 6px; }
+    .sparkle-4 { left: 72%; animation-duration: 8.8s; animation-delay: 3.5s; width: 4px; height: 4px; }
+    .sparkle-5 { left: 88%; animation-duration: 6.8s; animation-delay: 1.8s; width: 5px; height: 5px; }
+    .sparkle-6 { left: 40%; animation-duration: 9.4s; animation-delay: 4.8s; width: 3px; height: 3px; }
+
+    @keyframes floatSparkleUp {
+      0% {
+        transform: translateY(0) scale(0.6);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.85;
+      }
+      50% {
+        transform: translateY(-160px) scale(1.15) translateX(12px);
+        opacity: 0.95;
+      }
+      80% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-340px) scale(0.4) translateX(-10px);
+        opacity: 0;
+      }
+    }
+
+    .footer-crest-grand {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .crest-wreath-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      animation: slowRotateWreath 28s linear infinite;
+      transform-origin: center center;
+      color: var(--gold-accent);
+      filter: drop-shadow(0 0 10px rgba(197, 168, 128, 0.45));
+    }
+
+    @keyframes slowRotateWreath {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .crest-glow-halo {
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(223, 202, 167, 0.55);
+      animation: pulseAuraHalo 4s ease-in-out infinite;
+      box-shadow: 0 0 24px rgba(197, 168, 128, 0.35);
+      background: radial-gradient(circle, rgba(197, 168, 128, 0.12) 0%, transparent 75%);
+    }
+
+    @keyframes pulseAuraHalo {
+      0%, 100% {
+        transform: scale(0.96);
+        opacity: 0.55;
+        box-shadow: 0 0 18px rgba(197, 168, 128, 0.25);
+      }
+      50% {
+        transform: scale(1.04);
+        opacity: 1;
+        box-shadow: 0 0 32px rgba(223, 202, 167, 0.6), 0 0 12px rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    .crest-monogram-inner {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .crest-monogram-rings {
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      margin-bottom: 2px;
+      animation: gentleRingBob 3.2s ease-in-out infinite;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8));
+    }
+
+    @keyframes gentleRingBob {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-3px) scale(1.08); color: #ffffff; }
+    }
+
+    .crest-monogram-text {
+      font-size: 1.6rem;
+      color: var(--gold-champagne);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 16px rgba(197, 168, 128, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      user-select: none;
+    }
+
+    .crest-monogram-text .crest-amp {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--gold-light);
+    }
+
+    .footer-text-content {
+      position: relative;
+      z-index: 3;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .footer-flourish-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 20px auto 16px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .footer-flourish-divider::before,
+    .footer-flourish-divider::after {
+      content: '';
+      height: 1px;
+      width: 55px;
+      background: linear-gradient(90deg, transparent, var(--gold-accent));
+    }
+    .footer-flourish-divider::after {
+      background: linear-gradient(to left, transparent, var(--gold-accent));
+    }
+
+    .footer-flourish-heart {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(25, 42, 69, 0.6);
+      border: 1px solid var(--gold-accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-size: 0.82rem;
+      box-shadow: 0 0 14px rgba(197, 168, 128, 0.4);
+      animation: heartbeatLoop 2.8s ease-in-out infinite;
+    }
+
+    @keyframes heartbeatLoop {
+      0%, 100% { transform: scale(1); }
+      14% { transform: scale(1.15); box-shadow: 0 0 20px rgba(223, 202, 167, 0.65); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.12); box-shadow: 0 0 16px rgba(223, 202, 167, 0.55); }
+      70% { transform: scale(1); }
     }
 
     .watermark-btn {
@@ -1706,6 +1920,8 @@
       gap: 6px;
       margin-bottom: 6px;
       text-transform: uppercase;
+      position: relative;
+      z-index: 3;
     }
 
     .watermark-btn:hover {
@@ -1729,6 +1945,8 @@
       border-radius: 16px;
       font-family: inherit;
       display: inline-block;
+      position: relative;
+      z-index: 3;
     }
 
     .admin-text-link:hover { color: var(--gold-light); background: rgba(255, 255, 255, 0.08); text-decoration: underline; }
@@ -2382,32 +2600,91 @@
       </div>
     </section>
 
+    <!-- FOOTER LUXURY CLOSING DENGAN ANIMASI LOOP & ORNAMEN MEGAH -->
     <footer class="footer-quote">
-      <p id="teksPenutup" style="font-size: 0.88rem; color: var(--gold-light); max-width: 360px; margin: 0 auto; line-height: 1.65;">
-        Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
-      </p>
+      <div class="footer-watermark-pattern"></div>
+      
+      <!-- Botanical Silhouette Vectors -->
+      <svg class="footer-botanical-bg footer-bg-left" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M10,90 Q40,60 50,10 Q60,60 90,90 Q50,70 10,90 Z" opacity="0.4"/>
+        <circle cx="50" cy="20" r="4"/>
+        <circle cx="35" cy="45" r="3"/>
+        <circle cx="65" cy="45" r="3"/>
+      </svg>
+      <svg class="footer-botanical-bg footer-bg-right" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M10,90 Q40,60 50,10 Q60,60 90,90 Q50,70 10,90 Z" opacity="0.4"/>
+        <circle cx="50" cy="20" r="4"/>
+        <circle cx="35" cy="45" r="3"/>
+        <circle cx="65" cy="45" r="3"/>
+      </svg>
 
-      <div style="margin-top: 14px;">
-        <p style="font-size: 0.78rem; color: rgba(243, 235, 217, 0.7); font-style: italic; margin-bottom: 2px;">Kami yang berbahagia,</p>
-        <h3 class="font-serif" id="footerNames" style="font-size: 2.1rem; color: var(--gold-champagne); letter-spacing: 0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">
-          Tono & Tini
-        </h3>
+      <!-- Ambient Floating Golden Sparkles -->
+      <div class="footer-ambient-sparkles">
+        <div class="ambient-sparkle sparkle-1"></div>
+        <div class="ambient-sparkle sparkle-2"></div>
+        <div class="ambient-sparkle sparkle-3"></div>
+        <div class="ambient-sparkle sparkle-4"></div>
+        <div class="ambient-sparkle sparkle-5"></div>
+        <div class="ambient-sparkle sparkle-6"></div>
       </div>
 
-      <div class="section-divider" style="margin: 18px auto 16px;">
-        <i class="fa-solid fa-heart" style="font-size: 0.75rem;"></i>
+      <!-- Golden Animated Grand Monogram Crest -->
+      <div class="footer-crest-grand">
+        <svg class="crest-wreath-svg" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 4"/>
+          <path d="M50 4 C58 14 62 26 50 36 C38 26 42 14 50 4 Z" fill="currentColor" opacity="0.75"/>
+          <path d="M50 96 C58 86 62 74 50 64 C38 74 42 86 50 96 Z" fill="currentColor" opacity="0.75"/>
+          <path d="M4 50 C14 42 26 38 36 50 C26 62 14 58 4 50 Z" fill="currentColor" opacity="0.75"/>
+          <path d="M96 50 C86 42 74 38 64 50 C74 62 86 58 96 50 Z" fill="currentColor" opacity="0.75"/>
+          <circle cx="20" cy="20" r="2.5" fill="currentColor"/>
+          <circle cx="80" cy="20" r="2.5" fill="currentColor"/>
+          <circle cx="20" cy="80" r="2.5" fill="currentColor"/>
+          <circle cx="80" cy="80" r="2.5" fill="currentColor"/>
+        </svg>
+
+        <div class="crest-glow-halo"></div>
+
+        <div class="crest-monogram-inner">
+          <div class="crest-monogram-rings">
+            <i class="fa-solid fa-ring"></i>
+          </div>
+          <div class="crest-monogram-text font-script">
+            <span id="footerInitialPria">T</span>
+            <span class="crest-amp">&</span>
+            <span id="footerInitialWanita">T</span>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <button type="button" class="watermark-btn" onclick="openVendorPromoModal()" title="Tertarik membuat undangan digital seperti ini? Klik di sini!">
-          <i class="fa-solid fa-sparkles"></i> DIGITAL WEDDING INVITATION &bull; 2026
-        </button>
-      </div>
+      <div class="footer-text-content">
+        <p id="teksPenutup" style="font-size: 0.90rem; color: var(--gold-light); line-height: 1.7; text-shadow: 0 2px 4px rgba(0,0,0,0.85); font-weight: 500;">
+          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
+        </p>
 
-      <div style="margin-top: 6px;">
-        <button type="button" class="admin-text-link" onclick="openAdminAuthModal()">
-          Panel Admin
-        </button>
+        <div style="margin-top: 18px;">
+          <p style="font-size: 0.80rem; color: rgba(243, 235, 217, 0.78); font-style: italic; letter-spacing: 0.5px; margin-bottom: 4px;">Kami yang berbahagia,</p>
+          <h3 class="font-serif" id="footerNames" style="font-size: 2.35rem; color: var(--gold-champagne); letter-spacing: 1px; text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 20px rgba(197, 168, 128, 0.45); line-height: 1.2;">
+            Tono & Tini
+          </h3>
+        </div>
+
+        <div class="footer-flourish-divider">
+          <div class="footer-flourish-heart">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        </div>
+
+        <div style="margin-top: 6px;">
+          <button type="button" class="watermark-btn" onclick="openVendorPromoModal()" title="Tertarik membuat undangan digital seperti ini? Klik di sini!">
+            <i class="fa-solid fa-sparkles"></i> DIGITAL WEDDING INVITATION &bull; 2026
+          </button>
+        </div>
+
+        <div style="margin-top: 6px;">
+          <button type="button" class="admin-text-link" onclick="openAdminAuthModal()">
+            Panel Admin
+          </button>
+        </div>
       </div>
     </footer>
 
@@ -3046,7 +3323,6 @@
         var fallbackThumb = p.fallbackThumb || p.fallbackUrl || '';
         
         var isFeatured = (i === 0 || i === 7);
-        // Terapkan animasi 'reveal-zoom-center' ke seluruh 8 foto agar membesar anggun dari tengah
         var cardClass = isFeatured ? 'gallery-item featured-wide reveal-zoom-center' : 'gallery-item reveal-zoom-center';
         var delayClass = 'delay-' + ((i % 4) * 75 + 75);
 
@@ -3516,12 +3792,21 @@
           if (twDesc) twDesc.content = s.teks_penutup;
         }
         
+        var initP = namaPria ? String(namaPria).trim().charAt(0).toUpperCase() : 'T';
+        var initW = namaWanita ? String(namaWanita).trim().charAt(0).toUpperCase() : 'T';
+
         var loaderInitialPria = document.getElementById('loaderInitialPria');
-        if (loaderInitialPria) loaderInitialPria.textContent = namaPria ? String(namaPria).trim().charAt(0).toUpperCase() : 'T';
+        if (loaderInitialPria) loaderInitialPria.textContent = initP;
         var loaderInitialWanita = document.getElementById('loaderInitialWanita');
-        if (loaderInitialWanita) loaderInitialWanita.textContent = namaWanita ? String(namaWanita).trim().charAt(0).toUpperCase() : 'T';
+        if (loaderInitialWanita) loaderInitialWanita.textContent = initW;
         var loaderCouple = document.getElementById('loaderCoupleNames');
         if (loaderCouple && coupleText) loaderCouple.textContent = coupleText;
+
+        // Monogram footer grand crest
+        var footerInitP = document.getElementById('footerInitialPria');
+        if (footerInitP) footerInitP.textContent = initP;
+        var footerInitW = document.getElementById('footerInitialWanita');
+        if (footerInitW) footerInitW.textContent = initW;
 
         var coverPria = document.getElementById('coverNamaPria');
         if (coverPria) coverPria.textContent = namaPria;
