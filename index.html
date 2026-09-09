@@ -11,7 +11,7 @@
     /**
      * 1. URL Web App Google Apps Script hasil Deploy backend (berakhiran /exec)
      */
-    var DEFAULT_GAS_API_URL = "https://script.google.com/macros/s/AKfycbwQ-TLWmkW6NEADg-RBSgeYnqnhXaDWRs5onSFhdoqVJ0qa4HyF7ikv91D2xsEFoIy8/exec";
+    var DEFAULT_GAS_API_URL = "https://script.google.com/macros/s/AKfycbz_REPLACE_WITH_YOUR_EXEC_ID/exec";
 
     /**
      * 2. Direct URL Foto Cover untuk Thumbnail WhatsApp di GitHub Pages
@@ -1258,8 +1258,8 @@
     }
 
     .gallery-item:hover, .gallery-item:active {
-      transform: translateY(-3px) scale(1.015);
-      box-shadow: var(--shadow-md), 0 0 14px rgba(197, 168, 128, 0.35);
+      transform: translateY(-3px) scale(1.018);
+      box-shadow: var(--shadow-md), 0 0 16px rgba(197, 168, 128, 0.4);
       border-color: var(--gold-light);
     }
 
@@ -1281,58 +1281,22 @@
     }
 
     .gallery-item:hover .gallery-item-img {
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
 
+    /* Soft Luxury Glow Overlay (Clean: Tanpa Tulisan & Logo Apapun) */
     .gallery-item-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(16, 29, 48, 0.0) 50%, rgba(16, 29, 48, 0.72) 100%);
-      opacity: 0.85;
+      background: linear-gradient(180deg, rgba(16, 29, 48, 0.0) 50%, rgba(16, 29, 48, 0.35) 100%);
+      opacity: 0;
       transition: opacity 0.35s ease;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      padding: 10px 12px;
       pointer-events: none;
     }
 
-    .gallery-item:hover .gallery-item-overlay {
+    .gallery-item:hover .gallery-item-overlay,
+    .gallery-item:active .gallery-item-overlay {
       opacity: 1;
-      background: linear-gradient(180deg, rgba(16, 29, 48, 0.15) 20%, rgba(16, 29, 48, 0.85) 100%);
-    }
-
-    .gallery-item-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.70rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--gold-champagne);
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
-    }
-
-    .gallery-item-zoom-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: rgba(25, 42, 69, 0.85);
-      border: 1px solid var(--gold-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-light);
-      font-size: 0.72rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease;
-    }
-
-    .gallery-item:hover .gallery-item-zoom-icon {
-      transform: scale(1.15);
-      color: #ffffff;
-      background: var(--navy-primary);
     }
 
     .gallery-lightbox-backdrop {
@@ -2229,6 +2193,7 @@
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Potret kebahagiaan dan lembaran cinta kami yang abadi</p>
       </div>
 
+      <!-- Grid 8 Foto: Bersih Tanpa Label & Tanpa Ikon (Tap to View Fullscreen) -->
       <div class="gallery-grid-container" id="galleryGridContainer">
         <!-- Rendered dynamically by renderGalleryGrid() -->
       </div>
@@ -2634,14 +2599,14 @@
 
     /* Default 8 Foto Prewedding Resolusi Tinggi & Cepat */
     var defaultGalleryPhotos = [
-      { id: 'foto_galeri_1', index: 1, url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80', tag: 'Highlight' },
-      { id: 'foto_galeri_2', index: 2, url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80', tag: 'Romantis' },
-      { id: 'foto_galeri_3', index: 3, url: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', tag: 'Candid' },
-      { id: 'foto_galeri_4', index: 4, url: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80', tag: 'Detail' },
-      { id: 'foto_galeri_5', index: 5, url: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=600&q=80', tag: 'Tatapan' },
-      { id: 'foto_galeri_6', index: 6, url: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80', tag: 'Outdoor' },
-      { id: 'foto_galeri_7', index: 7, url: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80', tag: 'Bahagia' },
-      { id: 'foto_galeri_8', index: 8, url: 'https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=600&q=80', tag: 'Selamanya' }
+      { id: 'foto_galeri_1', index: 1, url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80' },
+      { id: 'foto_galeri_2', index: 2, url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80' },
+      { id: 'foto_galeri_3', index: 3, url: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80' },
+      { id: 'foto_galeri_4', index: 4, url: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80' },
+      { id: 'foto_galeri_5', index: 5, url: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=600&q=80' },
+      { id: 'foto_galeri_6', index: 6, url: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80' },
+      { id: 'foto_galeri_7', index: 7, url: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80' },
+      { id: 'foto_galeri_8', index: 8, url: 'https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=1200&q=80', thumb: 'https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=600&q=80' }
     ];
 
     /* KEY PENYIMPANAN OFFLINE & CACHE BROWSER */
@@ -2737,7 +2702,7 @@
       if (typeof google !== 'undefined' && google.script && google.script.run) {
         if (action === 'getSettings') {
           google.script.run.withSuccessHandler(function(res) { callbackSuccess({ success: true, settings: res }); }).withFailureHandler(callbackError).getWeddingSettings();
-        } else if (action === 'getStories') {
+        } else if (action === 'getStories' || action === 'getLoveStories') {
           google.script.run.withSuccessHandler(function(res) { callbackSuccess({ success: true, stories: res }); }).withFailureHandler(callbackError).getLoveStories();
         } else if (action === 'getRSVPList') {
           google.script.run.withSuccessHandler(callbackSuccess).withFailureHandler(callbackError).getRSVPList(params.limit, params.offset);
@@ -2761,6 +2726,7 @@
         return;
       }
 
+      // Cache-busting t=Date.now() agar selalu mengambil data paling segar dari Google Sheets
       var query = '?action=' + encodeURIComponent(action) + '&t=' + Date.now();
       if (params) {
         for (var pKey in params) {
@@ -2986,6 +2952,18 @@
       return cleanUrl;
     }
 
+    /* Fallback loader jika Google CDN dibatasi hak akses */
+    function handleGalleryImgError(imgEl, originalUrl) {
+      if (!imgEl || !originalUrl) return;
+      var fileId = '';
+      var m = originalUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || originalUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (m && m[1]) fileId = m[1];
+
+      if (fileId && imgEl.src.indexOf('thumbnail?id=') === -1) {
+        imgEl.src = 'https://drive.google.com/thumbnail?id=' + fileId + '&sz=w800';
+      }
+    }
+
     var scrollObserver = null;
 
     function initLuxuryScrollObserver() {
@@ -3182,26 +3160,22 @@
       }
       if (section) section.style.display = 'block';
 
-      var defaultTags = ['Highlight', 'Momen Manis', 'Romantis', 'Candid', 'Tatapan', 'Nuansa Alam', 'Kebahagiaan', 'Selamanya'];
       var html = '';
 
       for (var i = 0; i < photoList.length; i++) {
         var p = photoList[i];
         var thumbUrl = p.thumb || p.url || '';
-        var fullUrl = p.url || p.thumb || '';
-        var tagText = p.tag || defaultTags[i] || ('Foto ' + (i + 1));
+        var rawUrl = p.raw || p.url || '';
         
         // Foto 1 & Foto 8: Desain Editorial Full-Width Cinematic
         var isFeatured = (i === 0 || i === 7);
         var cardClass = isFeatured ? 'gallery-item featured-wide reveal-scale' : 'gallery-item reveal-on-scroll';
         var delayClass = 'delay-' + ((i % 4) * 75 + 75);
 
-        html += '<div class="' + cardClass + ' ' + delayClass + '" onclick="openGalleryLightbox(' + i + ')" title="Buka foto fullscreen">' +
-          '<img class="gallery-item-img" src="' + escapeHTML(thumbUrl) + '" alt="' + escapeHTML(tagText) + '" loading="lazy">' +
-          '<div class="gallery-item-overlay">' +
-            '<span class="gallery-item-badge"><i class="fa-solid fa-camera"></i> ' + escapeHTML(tagText) + '</span>' +
-            '<span class="gallery-item-zoom-icon"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>' +
-          '</div>' +
+        // MURNI BERSIH: Seluruh badge teks ("HIGHLIGHT", dll) & ikon perbesar DIHILANGKAN
+        html += '<div class="' + cardClass + ' ' + delayClass + '" onclick="openGalleryLightbox(' + i + ')" title="Ketuk untuk melihat foto fullscreen">' +
+          '<img class="gallery-item-img" src="' + escapeHTML(thumbUrl) + '" alt="Prewedding Photo ' + (i + 1) + '" loading="lazy" onerror="handleGalleryImgError(this, \'' + escapeHTML(rawUrl) + '\')">' +
+          '<div class="gallery-item-overlay"></div>' +
         '</div>';
       }
 
@@ -3257,6 +3231,13 @@
         imgEl.style.opacity = '1';
         imgEl.style.transform = 'scale(1)';
       };
+      tempImg.onerror = function() {
+        if (currentPhoto.raw) {
+          handleGalleryImgError(imgEl, currentPhoto.raw);
+        }
+        imgEl.style.opacity = '1';
+        imgEl.style.transform = 'scale(1)';
+      };
       tempImg.src = targetUrl;
 
       counterEl.textContent = 'Foto ' + (currentLightboxIndex + 1) + ' / ' + activeGalleryList.length;
@@ -3279,7 +3260,6 @@
       }
     }
 
-    /* Gesture Swipe Halus di Layar HP untuk Galeri */
     function initGallerySwipeListener() {
       var touchArea = document.getElementById('lightboxTouchArea');
       if (!touchArea) return;
@@ -3456,10 +3436,6 @@
           saveLocalData(OFFLINE_KEYS.SETTINGS, cachedSettings);
           applySettingsToDOM(cachedSettings);
 
-          if (cachedSettings.galeri_foto && Array.isArray(cachedSettings.galeri_foto) && cachedSettings.galeri_foto.length > 0) {
-            renderGalleryGrid(cachedSettings.galeri_foto);
-          }
-
           var directCover = cachedSettings.foto_cover_direct || formatDriveImageUrl(cachedSettings.foto_cover, 'w1200');
           preloadCoverAndDismissLoader(directCover);
         } else {
@@ -3576,6 +3552,31 @@
           var ortuWanitaNames = document.getElementById('ortuWanitaNames');
           if (ortuWanitaRel) ortuWanitaRel.textContent = pWanita.rel;
           if (ortuWanitaNames) ortuWanitaNames.textContent = pWanita.names;
+        }
+
+        /* DYNAMIC AUTO-SYNC 8 FOTO GALERI DARI GOOGLE SHEET */
+        var dynamicGallery = [];
+        for (var g = 1; g <= 8; g++) {
+          var gKey = 'foto_galeri_' + g;
+          var photoRawUrl = s[gKey] || (s.galeri_foto && s.galeri_foto[g - 1] ? (s.galeri_foto[g - 1].raw || s.galeri_foto[g - 1].url) : '');
+          if (photoRawUrl) {
+            var thumb = s[gKey + '_thumb'] || formatDriveImageUrl(photoRawUrl, 'w600');
+            var direct = s[gKey + '_direct'] || formatDriveImageUrl(photoRawUrl, 'w1200');
+            dynamicGallery.push({
+              id: gKey,
+              index: g,
+              url: direct,
+              thumb: thumb,
+              raw: photoRawUrl
+            });
+          }
+        }
+
+        if (dynamicGallery.length > 0) {
+          cachedSettings.galeri_foto = dynamicGallery;
+          renderGalleryGrid(dynamicGallery);
+        } else if (s.galeri_foto && Array.isArray(s.galeri_foto) && s.galeri_foto.length > 0) {
+          renderGalleryGrid(s.galeri_foto);
         }
 
         if (s.tanggal_akad) document.getElementById('tanggalAkad').textContent = formatDateToIndoFull(s.tanggal_akad);
