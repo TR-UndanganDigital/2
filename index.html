@@ -3066,6 +3066,55 @@
       }
     }
 
+    var isModalOpenInHistory = false;
+    var isPopStateAction = false;
+
+    function pushModalHistoryState() {
+      if (!isModalOpenInHistory && window.history && window.history.pushState) {
+        isModalOpenInHistory = true;
+        window.history.pushState({ modalOpen: true }, '');
+      }
+    }
+
+    function revertModalHistoryState() {
+      if (isModalOpenInHistory && !isPopStateAction) {
+        isModalOpenInHistory = false;
+        if (window.history) {
+          window.history.back();
+        }
+      }
+    }
+
+    function closeAllActiveModals() {
+      var modalLb = document.getElementById('modalGalleryLightbox');
+      if (modalLb && modalLb.style.display === 'flex') {
+        closeGalleryLightbox(true);
+      }
+      var modalDash = document.getElementById('modalAdminDashboard');
+      if (modalDash && modalDash.style.display === 'flex') {
+        closeAdminDashboardModal(true);
+      }
+      var modalAuth = document.getElementById('modalAdminAuth');
+      if (modalAuth && modalAuth.style.display === 'flex') {
+        closeAdminAuthModal(true);
+      }
+      var modalVendor = document.getElementById('modalVendorPromo');
+      if (modalVendor && modalVendor.style.display === 'flex') {
+        closeVendorPromoModal(true);
+      }
+    }
+
+    window.addEventListener('popstate', function(event) {
+      if (isModalOpenInHistory) {
+        isPopStateAction = true;
+        isModalOpenInHistory = false;
+        closeAllActiveModals();
+        setTimeout(function() {
+          isPopStateAction = false;
+        }, 120);
+      }
+    });
+
     function openGalleryLightbox(index) {
       if (!activeGalleryList || activeGalleryList.length === 0) return;
       currentLightboxIndex = (index >= 0 && index < activeGalleryList.length) ? index : 0;
@@ -3081,10 +3130,11 @@
         }, 10);
       }
 
+      pushModalHistoryState();
       document.addEventListener('keydown', handleLightboxKeyDown);
     }
 
-    function closeGalleryLightbox() {
+    function closeGalleryLightbox(fromPopstate) {
       var modal = document.getElementById('modalGalleryLightbox');
       if (modal) {
         modal.style.opacity = '0';
@@ -3093,6 +3143,9 @@
         }, 300);
       }
       document.removeEventListener('keydown', handleLightboxKeyDown);
+      if (!fromPopstate) {
+        revertModalHistoryState();
+      }
     }
 
     function updateLightboxDisplay() {
@@ -4009,11 +4062,15 @@
     function openVendorPromoModal() {
       var modal = document.getElementById('modalVendorPromo');
       if (modal) modal.style.display = 'flex';
+      pushModalHistoryState();
     }
 
-    function closeVendorPromoModal() {
+    function closeVendorPromoModal(fromPopstate) {
       var modal = document.getElementById('modalVendorPromo');
       if (modal) modal.style.display = 'none';
+      if (!fromPopstate) {
+        revertModalHistoryState();
+      }
     }
 
     function openAdminAuthModal() {
@@ -4024,11 +4081,15 @@
         pinInput.value = '';
         pinInput.focus();
       }
+      pushModalHistoryState();
     }
 
-    function closeAdminAuthModal() {
+    function closeAdminAuthModal(fromPopstate) {
       var modal = document.getElementById('modalAdminAuth');
       if (modal) modal.style.display = 'none';
+      if (!fromPopstate) {
+        revertModalHistoryState();
+      }
     }
 
     function handleAdminLogin(e) {
@@ -4047,7 +4108,7 @@
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-key"></i> Buka Panel';
         if (res && res.success) {
-          closeAdminAuthModal();
+          closeAdminAuthModal(true);
           openAdminDashboardModal();
           showToast('Login Admin Berhasil!');
         } else {
@@ -4057,7 +4118,7 @@
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-key"></i> Buka Panel';
         if (pinVal === (cachedSettings.admin_pin || '123456')) {
-          closeAdminAuthModal();
+          closeAdminAuthModal(true);
           openAdminDashboardModal();
           showToast('Login Admin Berhasil (Offline Mode)!');
         } else {
@@ -4069,14 +4130,18 @@
     function openAdminDashboardModal() {
       var modal = document.getElementById('modalAdminDashboard');
       if (modal) modal.style.display = 'flex';
+      pushModalHistoryState();
       switchAdminTab('newGuest');
       loadAdminGuests();
       loadAdminRSVPStats();
     }
 
-    function closeAdminDashboardModal() {
+    function closeAdminDashboardModal(fromPopstate) {
       var modal = document.getElementById('modalAdminDashboard');
       if (modal) modal.style.display = 'none';
+      if (!fromPopstate) {
+        revertModalHistoryState();
+      }
     }
 
     function switchAdminTab(tabName) {
